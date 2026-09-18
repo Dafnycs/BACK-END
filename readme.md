@@ -16,13 +16,22 @@ Linguagem essencial da Web: ajuda a dar vida aos sites.
 -Alta demanda: é muito usado por empresas e possui muitas oportunidades no mercado.
 
 ### Como o JavaScript funciona?
-O JavaScript funciona através de comandos que são executados pelo navegador. Ele permite que o site entenda e responda às ações do usuário, deixando a página mais dinâmica.
+- O JavaScript funciona através de comandos que são executados pelo navegador. Ele permite que o site entenda e responda às ações do usuário, deixando a página mais dinâmica.
 
-Por exemplo: quando uma pessoa clica em um botão, o JavaScript pode identificar esse clique e fazer alguma coisa, como mostrar uma mensagem, abrir um menu ou mudar um texto.
+-Por exemplo: quando uma pessoa clica em um botão, o JavaScript pode identificar esse clique e fazer alguma coisa, como mostrar uma mensagem, abrir um menu ou mudar um texto.
 
-Ele também pode receber informações de formulários, fazer cálculos e buscar dados, tornando o site mais completo e funcional.
+-Ele também pode receber informações de formulários, fazer cálculos e buscar dados, tornando o site mais completo e funcional.
 
-Como o JavaScript pode ser executado?
+## Como o JavaScript pode ser executado?
+O JavaScript pode ser executado principalmente de 3 formas:
+
+- No navegador: é a forma mais comum. Chrome, Edge e Firefox conseguem executar JavaScript.
+
+- Dentro do HTML: o código pode ser colocado diretamente na página usando a tag <script>.
+
+- Em um arquivo separado: o JavaScript pode ficar em um arquivo .js e ser conectado ao HTML.
+
+-Exemplo: um arquivo script.js pode fazer um botão funcionar quando o usuário clicar nele.
 
 ## O JavaScript pode ser executado em dois lugares principais:
 
