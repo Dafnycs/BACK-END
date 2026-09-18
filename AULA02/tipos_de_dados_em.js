@@ -138,7 +138,8 @@ let segnumm = 5;
 console.log(prinumm === segnumm);
 
 //Exercício 6 - Verifique se um número é par.
-
+let numeroo = 4;
+console.log(numeroo % 2 === 0)
 
 
 //Exercício 7 - Use AND (&&) em uma condição.
