@@ -115,8 +115,8 @@ let podeDirigir = idadee >= 18;
 console.log(podeDirigir);
 
 //Exercício 2 - Verifique se um número é maior que 10.
-let numero = 15
-let maior = numero <= 10;
+let Numero = 15
+let maior = Numero <= 10;
 console.log(maior);
 
 
@@ -143,6 +143,26 @@ console.log(numeroo % 2 === 0)
 
 
 //Exercício 7 - Use AND (&&) em uma condição.
+let idadde = 20;
+let temCarteira = true;
+let podeEntrar = idadde >= 18 && temCarteira;
+console.log(podeEntrar);
+
+
 //Exercício 8 - Use OR (||) em uma condição.
-//Exercício 9 - Negue um valor boolean.
+let temDinheiro = false;
+let temCartao = true;
+let podeComprar = temDinheiro || temCartao;
+console.log(podeComprar);
+
+
+// Exercício 9 - Negue um valor boolean.
+let aprovado = true;
+let resultado = !aprovado;
+console.log(resultado);
+
+
 //Exercício 10 - Compare texto e número.
+let texto = "10";
+let numero = 10;
+console.log(texto === numero);
