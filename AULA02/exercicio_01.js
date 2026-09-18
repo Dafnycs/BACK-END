@@ -7,3 +7,7 @@ let idade = anoAtual - anoNascimento;
 
 console.log("A idade é:" + idade);
 
+
+//Template string 
+console.log (`sua idade é: ${idade} anos. ` )
+
