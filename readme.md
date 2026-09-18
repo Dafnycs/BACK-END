@@ -5,14 +5,16 @@
 - Com o tempo, o JavaScript ficou muito popular e passou a ser usado em sites, aplicativos e sistemas. Hoje, é uma das principais linguagens usadas no desenvolvimento web, junto com HTML e CSS.
 
 ## Importância no Desenvolvimento Web
--O JavaScript é muito importante no desenvolvimento web porque permite criar sites mais interativos, rápidos e funcionais. Ele faz com que o site possa responder às ações do usuário e realizar diferentes funções.
+- O JavaScript é muito importante no desenvolvimento web porque permite criar sites mais interativos, rápidos e funcionais. Ele faz com que o site possa responder às ações do usuário e realizar diferentes funções.
 
 Linguagem essencial da Web: ajuda a dar vida aos sites.
+
 -Full Stack: pode ser usado no Front-End e no Back-End.
+
 -Base de frameworks: é usado em ferramentas como React, Angular e Vue.
+
 -Alta demanda: é muito usado por empresas e possui muitas oportunidades no mercado.
 
-## Como funcina
 ### Como o JavaScript funciona?
 O JavaScript funciona através de comandos que são executados pelo navegador. Ele permite que o site entenda e responda às ações do usuário, deixando a página mais dinâmica.
 
