@@ -37,6 +37,6 @@ console.log(pi)
 
 //________________________________________________
 //  SNAKE CASE
-// - Palavras separadas por underscore_
+// - Palavras separadas por underscore _
 
 //let nomw_completo; let total_vendas;
