@@ -8,3 +8,16 @@ let pessoa = {
 };
 console.log(pessoa.nome);
 console.log(pessoa.idade);
+
+
+//crie um objeto chamado `carro` com as propriedades `marca`, `modele` e `ano`
+// Exiba cada propriedade no console.
+
+let carro = {
+    marca: "Toyota",
+    modelo: "Corolla",
+    ano: 2003
+}
+console.log(carro.marca);
+console.log(carro.modelo);
+console.log(carro.ano);
