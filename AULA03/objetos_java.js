@@ -11,7 +11,7 @@ let usuario = {
 console.log(usuario.login)
 console.log(usuario.senha)
 console.log(usuario.tipo)
-
+console.log("o login do administrador é " + usuario.login + " e a senha é " + usuario.senha + "muito fraca por sinal" )
 
 //Exercício 2 – Cadastro de Aluno
 //Crie um objeto aluno com:
@@ -29,6 +29,7 @@ let cadastro = {
 console.log(cadastro.nome)
 console.log(cadastro.curso)
 console.log(cadastro.turma)
+console.log("O aluno " + cadastro.nome + " está matriculado no curso de " + cadastro.curso + cadastro.turma)
 
 //Exercício 3 – Professor
 //Crie um objeto professor com:
@@ -46,7 +47,7 @@ let professor = {
 console.log(professor.nome)
 console.log(professor.displina)
 console.log(professor.turno)
-
+console.log(" O professor " + professor.nome + " ministra a disciplina de " + " no turno da " + professor.turno )
 
 //Exercício 4 – Empresa
 //Crie um objeto empresa com:
@@ -64,6 +65,7 @@ let empresa = {
 console.log(empresa.nome)
 console.log(empresa.area)
 console.log(empresa.cidade)
+console.log("A empresa " + empresa.nome + " atua na área de " + empresa.area + " e fica em " + empresa.cidade)
 
 //Exercício 5 – Computador
 //Crie um objeto computador com:
@@ -77,9 +79,10 @@ let computador = {
     processador: "intel i5",
     memoria: "8GB"
 }
-console.log(compudor.marca)
-console.log(compudor.processador)
-console.log(compudor.memoria)
+console.log(computador.marca)
+console.log(computador.processador)
+console.log(computador.memoria)
+console.log("O computador" + computador.marca + " possui processador" + computador.processador + " e mémoria de " + computador.memoria )
 
 //Exercício 6 – Livro
 //Crie um objeto livro com:
@@ -97,6 +100,7 @@ let livro = {
 console.log(livro.titulo)
 console.log(livro.autor)
 console.log(livro.paginas)
+console.log("O livro " + livro.titulo + " foi escrito por " + livro.autor + " e possui " + livro.paginas)
 
 //Exercício 7 – Filme
 //Crie um objeto filme com:
@@ -110,6 +114,10 @@ let filme = {
     genero:"Ficção",
     ano: "lançado em 1999"
 }
+console.log(filme.nome)
+console.log(filme.genero)
+console.log(filme.ano)
+console.log("O filme " + filme.nome + " é do gênero " + filme.genero  + " e foi  " + filme.lançando)
 
 //Exercício 8 – Jogo
 //Crie um objeto jogo com:
@@ -127,27 +135,76 @@ let jogo = {
 console.log(jogo.nome)
 console.log(jogo.plataforma)
 console.log(jogo.genero)
+console.log("O jogo " + jogo.nome + " roda na plataforma " + jogo.plataforma + " e pertence ao gênero " + jogo.genero )
 
-//Exercício 9 – Conta de Usuário
-//Crie um objeto conta com:
-//usuario
-//senha
-//nivel
-//Depois, exiba a mensagem:
-//O usuário eduardo possui nível administrador e utiliza a senha 1234, muito fraca por sinal.
-let Usuario = {
-    usuario: "Eduardo",
-    senha: "1234",
-    nivel: "administrador"
-}
-console.log(Usuario.usuario)
-console.log(usuario.senha)
-console.log(usuario.nivel)
 
-//Exercício 10 – Escola
+//Exercício 9 – Escola
 //Crie um objeto escola com:
 //nome
 //cidade
 //turno
 //Depois, exiba a mensagem:
 //A escola EEEP funciona na cidade de Fortaleza no turno da manhã.
+
+let Escola = {
+    nome: "EEEP",
+    cidade:"Fortaleza",
+    turno:"Manhã"
+}
+console.log(Escola.nome)
+console.log(Escola.cidade)
+console.log(Escola.turno)
+console.log("A escola " + Escola.nome + " funciona na cidade de " + Escola.cidade + " no turno da " + Escola.turno)
+
+//Exercício 10 – Cadastro de Usuário
+//Crie um objeto chamado conta para representar o cadastro de um usuário.
+
+//O objeto deve possuir as seguintes propriedades:
+//usuario
+//senha
+//nome
+//email
+//nivel
+//curso
+//turma
+//idade
+
+//Utilize os seguintes dados:
+//Usuário: eduardo
+//Senha: 1234
+//Nome: Eduardo Silva
+//E-mail: eduardo@email.com
+//Nível: administrador
+//Curso: Desenvolvimento de Sistemas
+//Turma: DS 2
+//Idade: 18
+
+//Depois de criar o objeto, utilize as propriedades do objeto para montar e exibir no console as seguintes informações:
+//Nome do usuário
+//Nome completo
+//E-mail
+//Curso
+//Turma
+//Idade
+//Nível de acesso
+//Senha
+
+let Casdastro = {
+    usuario: "eduardo",
+    senha:   1234,
+    nome:   "Eduardo Silva",
+    email:  "eduardo@email.com",
+    nivel:  "administrador",
+    curso:  "Desenvolvimento de Sistemas",
+    turma:  "DS 2",
+    idade:  18,
+}
+console.log(Casdastro.usuario) //ok
+console.log(Casdastro.senha)  //ok
+console.log(Casdastro.nome)
+console.log(Casdastro.email) //ok
+console.log(Casdastro.nivel) //ok
+console.log(Casdastro.curso) //ok
+console.log(Casdastro.turma) //ok
+console.log(Casdastro.idade) //ok
+console.log("O usuario " + Casdastro.usuario + ", de " + Casdastro.idade + " anos, esta matriculado no curso de " + Casdastro.curso + ", turma " + Casdastro.turma + ". Seu nível de acesso é "+ Casdastro.nivel + " e seu e-mail é " + Casdastro.email + ". A senha cadastrada é "  + Casdastro.senha)
