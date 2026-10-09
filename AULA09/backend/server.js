@@ -1,128 +1,131 @@
-// =========================
-//  NOSSA API DE CACHORROS
-// =========================
-// 
-//  Agora as fotos NÃO são baixadas automaticamente.
-//  elas DEVEM existir manualmente na pasta
-//  datas/fotos
-// ==================================================
+//==========================
+// NOSSA API DE CACHORROS
+//==========================
+//
+// Agora as fotos NÃO são mais baixadas automaticamente!.
+// Elas DEVEM existir manualmente na pasta
+// data/fotos
+//==========================
 
 // ROTAS:
-// GET /api/cachorros/aleatorios
+// GET /api/cachorros/aleatorio
 // GET /api/cachorros/:raca
 
 // Importar o framework Express para criar o servidor
 const express = require("express");
-// Importar o CORS para permitir requisições de outros dominios (ex:frontend)
+// Importar o CORS para permitir requisições de outros dominios (ex: frontend)
 const cors = require("cors");
 // Importa o módulo de arquivos do NODE
-const  fs = require("fs");
-// Importar utilidades para trabalhar com caminhos de arquivos
+const fs = require("fs");
+// Importa utilidades para trabalhar com caminhos de arquivos
 const path = require("path");
-// Importar o arquivo JSON que contém as raças e fotos 
-const cachorros = require("./data/dogs.json")
-// Criar a aplicação Express 
+// Importa o arquivo JSON que contém as raças e fotos
+const cachorros = require("./data/dogs.json");
+// cria a aplicação Express
 const app = express();
-// definir a porta onde o servidor vai funcionar
+// definir a porta onde o servidor irá rodar
 const PORT = 3000;
-//  Habilitar o use do CROS na aplicação
-app.listen(cors());
+// Habilitar o uso do CORS na aplicacao
+app.use(cors());
 
-// ====================================================
-//            SERVIR ARQUIVOS ESTÁTICOS
-// ====================================================
+//=================================================
+// SERVIR ARQUIVOS ESTÁTICOS
+//=================================================
 
 // Nós falamos para o express
-// "Tudo o que estiver na pasta data/fotos pode ser acessador pela URL /fotos"
+// "Tudo o que estiver na pasta data/fotos pode ser acessado pela URL /fotos"
 // Exemplo:
-// htpps://localhost:3000/fotos/husky/1.pg
+// http://localhost:3000/fotos/husky/1.jpg
 
-app.use (
-    "/fotos",
-    express.static(
-        path.join(__dirname, "data/fotos") //Camiinho real da pasta do serevidor
-    )
-)
+app.use(
+  "/fotos",
+  express.static(
+    path.join(__dirname, "data/fotos"), //caminho real da pasta do servidor
+  ),
+);
 
+//=================================================
+// FUNÇÃO AUXILIAR
+//=================================================
 
-// =================================
-//        FUNÇÃO AUXILIAR
-// =================================
-
-// Fução que recebe um array e retorna um intem aleatorio dele
+// função que recebe um array e retorna um item aleatório dele
 function sortear(array) {
-    // gera um numero aleatorio entre 0 e o tamnho do array
-    // array.length - conta quantos intens existem na lsita
-    // math.radom() - Sorteia um número decimal entre 0 e 1
-    // math.radom() - array.length -  Multiplica o número sorteado pela quantidade de intens
-    // math.floor() - tira a parte decimal, arredondando para baixo.
-     const i = Math.floor(Math.random() * array.length)
-    // cont i = guarda a posição na variavel i
-    // Retorna o intem sorteado
-    return array[i];
+  // gera um numero aleatório entre 0 e o tamanho do array
+  // array.length - conta quantos itens existem na lista
+  // math.random() - Sorteia um número decimal entre 0 e 1
+  // math.random() - array.length - Multiplica o número sorteado pela quantidade de itens
+  // math.floor() - tira a parte decimal, arredondando para baixo.
+  const i = Math.floor(Math.random() * array.length);
+  // const i = guarda a posição na variavel i
+  // retorna o item sorteado
+  return array[i];
 }
 
+//================================
+// ROTAS DA API
+//================================
 
-//===================================
-//          ROTAS DA API
-//===================================
-
-
-// ROTA 1- Cachorro aleatorio
+// ROTA 1 - Cachorro aleatório
 app.get("/api/cachorros/aleatorio", (req, res) => {
-// req ´request(requisição) = é o pedido que chega ao sevidor. por exemplo, o navegador pede uma de cahchorro
-// res - response(resposta) = é o que o servidor envia de volta, por exemplo, o endereço da foto do cachorro
+  // req - request(requisição) = é o pedido que chega ao servidor, por exemplo, o navegador pede uma foto de cachorro
+  // res - response(resposta) = é o que o servidor envia de volta, por exemplo, o endereço da foto do cachorro
 
+  // pegar todas as fotos de todas as raças
+  // object.values pega os valores do objeto
+  // flat transforma tudo em um único array
+  const todasAsFotos = Object.values(cachorros).flat();
 
+  //sorteia uma foto aleatória
+  const item = sortear(todasAsFotos);
 
-//pegar todas as fotos de todas as raças
-// object.values pega os valores do objeto
-// flat transforma tudo em único array
-const todasAsFotos = Object.values(cachorros).flat();
-})
-
-//Sorteia uma foto aleatória 
-const item = sortear(todasAsFotos)
-
-//respode para o cliente em formato JSON
-res.json({
+  //responder para o cliente em formato JSON
+  res.json({
     //status da resposta
-    status: "sucess",
+    status: "success",
     //URL da imagem que foi sorteada
-    messsage:`http://localhost:${PORT}/fotos/${item}`  
+    message: `http://localhost:${PORT}/fotos/${item}`,
+  });
 });
 
 // ROTA 2 - Cachorro por raça
-// Exeplo de acesso :
-// http://localhost:3000/api/cachorro/husky
+// exemplo de acesso:
+// http://localhost:3000/api/cachorros/husky
 
 app.get("/api/cachorros/:raca", (req, res) => {
+  //pega o parametro da URL (ex: husky)
+  const raca = req.params.raca.toLocaleLowerCase();
+  //params = contém os parâmetros definidos na URL da rota
+  //.raca = acessa o parâmetro chamado raca.
+  //.toLowerCase() = Transforma todas as letras em minúsculas
+  if (!cachorros[raca]) {
+    //cachorros[raca]: procurar a raça dentro do objeto *cachorros*
+    //!: significa não: Nesse caso, verifica se a raça não existe ou se seu valor é falso
+    //se não existir, retorna erro 404
+    res.status(404).json({
+      status: "error",
+      message: `Raça "${raca}" não encontrada`,
+    });
 
-        //pega o paramentro da URL (ex: husky)
-        const raca = req.params.raca.toLocaleLowerCase();
-        //params = contém os parâmetros definidos na URL da rota
-        //.raca = acessa o parâmetro chamado raca.
-        //.toLowerCase() = Transforma toda as letras em minusculas
-        if (!cachorros[raca]) {
-         //cachorros[raca]: procurar a raca dentro do objeto *cachorro*
-         //!: significa não: Nesse cas, verifica se a raça não existe ou se seu valor é falso
-            //se não existir, retornar erro 404
-            res.status(404).json({
-                status: "error",
-                message: `Raça "${raca}" não encotrada`
-            });
+    //encerra a execução da rota
+    return;
+  }
 
-            //encerra a execução da rota
-            return;
-        }
+  //sorteia uma foto da raca solicitada
+  const item = sortear(cachorros[raca]);
 
-        //sorteia uma foto de raca solicitada
-        const item = sortear(cachorros[raca]);
+  // retorna a resposta em JSON
+  res.json({
+    status: "success",
+    message: `http://localhost:${PORT}/fotos/${item}`,
+  });
+});
 
-        //retorna a resposta em JSON
-        res.json({
-            status:"success",
-            message: `https://localhost:${PORT}/fotos/${item}`
+//======================================
+// INICIA O SERVIDOR
+//=====================================
 
-        });
-})
+//inicia o servidor express
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  console.log(`📂 Coloque as fotos manualmente em: data/fotos/`);
+});
