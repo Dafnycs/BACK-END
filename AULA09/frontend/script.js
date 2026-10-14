@@ -38,7 +38,7 @@ const API = "http://localhost:3000/api/cachorros";
 // FUNÇÃO PRINCIPAL
 // ===========================
 
-async function buscaCachorro(url){
+async function buscarCachorro(url){
     // Adicionar a classe "loanding"
     // Normalmente usada para mostrar animação carregamente
     dogArea.classList.add("loading");
@@ -104,3 +104,48 @@ async function buscaCachorro(url){
         dogArea.classList.remove("loading")
     }    
 }
+
+
+// =============
+//    AÇÕES
+// =============
+
+//função que busca o cachorro aleatorio
+ function cachorroAleatorio(){
+    //chamar a função principal
+    //passando a rota/aleatorio de API
+    buscarCachorro(`${API}/aleatorio`);
+ }
+
+ //função que busca cachorro por raça 
+ function buscarPorRaca(){
+    //Pegar o texto digitado no input
+    //trim ele remove os espaaços em branco {trim()} do inicio e do fim dp texto
+    const raca = breedInput.value.trim().toLowerCase();
+ 
+
+ //Verificar se o usuário digitou algo
+ if(!raca) {
+    // se não digitou, mostra alerta
+    alert("Digite uma raça!")
+    // interrompe a funçao
+    return;
+    }
+
+    //chmar a API passando a raça para uma URL
+    //exemplo: /api/cachorros/husky
+    buscarCachorro(`${API}/${raca}`)
+ }
+
+
+ // ===========================
+ //         EVENTOS
+ // ===========================
+
+ // quando cliclar no botão "aleatorio"
+ randomBtn.addEventListener("click" , cachorroAleatorio)
+ // quando cliclar no butão "buscar"
+ searchBtn.addEventListener("click", buscarPorRaca)
+
+ //Quando clicar na imagem do cachorro
+ //carrga outro cachorro aleatório
