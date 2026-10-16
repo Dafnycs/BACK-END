@@ -15,7 +15,7 @@ const banco = new DatabaseSync(path.join(__dirname, 'tarefas.db')); //Abre o ban
 
 //Criar a tabela "tarefa" se ela ainda não existir
 banco.exec(`
-    CREATE TABLE IF NOT EXISTE tarefas(
+    CREATE TABLE IF NOT EXISTS tarefas(
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo          TEXT NOT NULL, 
     concluida       INTEGER DEFAULT 0     
@@ -44,3 +44,64 @@ app.use(express.static(path.join(__dirname, '..', 'public')));   // Entrega a p�
 //        Read       | GET       | /tarefas       | SELECT
 //        Update     | PUT       | /tarefas/:id   | INSERT
 //        Delete     | DELETE    | /tarefas/:id   | DELETE
+
+// =========================== CRIAR ===========================
+// POST /tarefas ---> salvar uma tarefa nova no banco de dados (sqlite)
+app.post('/tarefas', (requisicao, resposta)=>{
+    const titulo = requisicao.body.titulo; //Texto enviado pela página
+
+    // Se o titulo estiver, vazio, avisa que deu erro (400) e para aqui
+    if (!titulo) {
+        return resposta.status(400).json({erro: 'Digite um título'});
+    }
+    // INSERT: Adicionar uma linha na tabela. Lembre-se os "?" são trocados pelo valor do título
+    banco.prepare('INSERT INTO tarefas(titulo) VALUES(?)').run(titulo);
+    resposta.json({ ok: true}); //responde que deu certo
+});
+
+// PASSO A PASSO do que acontece no CREATE
+// 1) O usuario digita no campo e clica em "adicionar" no navegador
+// 2) O front manda um POST para /tarefas com {"titulo":"..."}
+// 3) Chega aqui no server. O express escolhe esta rota porque o metedo POST e o endereço é /tarefas
+// 4) "requisição.bodu.titulo" é o texto que o front mandou, lembrando só funciona por causa do express.json() que estiver lá em cima!
+// 5) Validação: se vier vazio, respondemos com status 400(= "pedido errado") em um JSON de erro, NUNCA confie no front, sempre validade aqui.
+// 6) insert em tarefas
+// 7) resposta
+
+// ====================== LER ======================
+// GET /tarefas -> devolve todas as tarefas
+app.get('/tarefas', (requisicao, resposta) =>{
+    //SELECT: Busca todas as linhas da tabela (as mais novas primeiro)
+    const tarefas = banco.prepare('SELECT * FROM tarefas ORDER BY id DESC').all();
+    resposta.json(tarefas);
+})
+
+// ================= AJUDAR =================
+// PUT /tarefas/5 --> muda a tarefa de id 5 (marca como feita ou pendente)
+app.put('/tarefas/:id', (requisicao, resposta) => {
+    const id = requisicao.params.id;                        //O numero que veio do endereço(o 5)
+    const concluida = requisicao.body.concluida;            //0 ou 1, enviado pela página
+
+    //UPDATE: alterar a linha que tem o ID
+    banco.prepare('UPDATE tarefas SET concluida = ? WHERE id = ?').run(concluida, id);
+    resposta.json({ ok: true});
+});
+
+// ============== APAGAR ===============
+// DELETE /tarefas/5 ---> apagar a tarefa
+app.delete('/tarefa/:id', (requisicao, resposta) => {
+    const id = requisicao.params.id;
+
+    //DELETE: remove a linha que tem esse id 
+    banco.prepare('DELETE FROM tarefas WHERE id = ?').run(id);
+
+    resposta.json({ ok: true});
+})
+
+//¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+// PARTE 5: LIGAR O SERVIDOR
+//¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+app.listen(3000, () => {
+    console.log('Servidor rodando em http://localhost:3000');
+
+})
