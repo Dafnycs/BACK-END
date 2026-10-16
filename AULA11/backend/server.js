@@ -89,7 +89,7 @@ app.put('/tarefas/:id', (requisicao, resposta) => {
 
 // ============== APAGAR ===============
 // DELETE /tarefas/5 ---> apagar a tarefa
-app.delete('/tarefa/:id', (requisicao, resposta) => {
+app.delete('/tarefas/:id', (requisicao, resposta) => {
     const id = requisicao.params.id;
 
     //DELETE: remove a linha que tem esse id 
